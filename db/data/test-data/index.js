@@ -1,1 +1,4 @@
-// require in and export out all test data
+exports.articlesData = require("./articlesData");
+exports.topicsData = require("./topicsData");
+exports.usersData = require("./usersData");
+exports.commentsData = require("./commentsData");
