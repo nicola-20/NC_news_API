@@ -6,9 +6,9 @@ const {
 } = require("../data");
 
 const {
-  commentOrigin,
+  articleOrigin,
   reformDate,
-  commentAuthor
+  reformComment
 } = require("../utils/assistanceFunctions");
 
 exports.seed = (knex, Promise) => {
@@ -32,8 +32,8 @@ exports.seed = (knex, Promise) => {
         .returning("*");
     })
     .then(() => {
-      const commentOwner = commentOrigin(articlesData);
-      const commentCreator = commentAuthor(commentsData, commentOwner);
+      const commentOwner = articleOrigin(articlesData);
+      const commentCreator = reformComment(commentsData, commentOwner);
       knex("comments")
         .insert(commentCreator)
         .returning("*");
