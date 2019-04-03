@@ -13,9 +13,3 @@ app.all("/*", routeNotFound);
 app.use(handle500);
 
 module.exports = app;
-
-/**
-GET /api/articles
-
-GET /api/articles/:article_id
-PATCH /api/articles/:article_id */

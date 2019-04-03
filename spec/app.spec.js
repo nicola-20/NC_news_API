@@ -13,9 +13,10 @@ describe("/", () => {
   after(() => connection.destroy());
 
   describe("/api", () => {
+    //TOPICS
     describe("/topics", () => {
       describe("DEFAULT BEHEAVIOURS", () => {
-        it("GET status 200: responds with an array of topics objects", () => {
+        it("GET status 200: responds with an array of topics objects with certain keys", () => {
           return request
             .get("/api/topics")
             .expect(200)
@@ -33,6 +34,29 @@ describe("/", () => {
             request[method]("/api/topics").expect(405)
           );
           return Promise.all(methodPromises);
+        });
+      });
+    });
+    //ARTICLES
+    describe("/articles", () => {
+      describe("DEFAULT BEHEAVIOURS", () => {
+        it("GET status 200: responds with an array of artiles objects with certain keys", () => {
+          return request
+            .get("/api/articles")
+            .expect(200)
+            .then(({ body }) => {
+              body.articles.forEach(article => {
+                expect(article).to.contain.keys(
+                  "article_id",
+                  "title",
+                  "body",
+                  "votes",
+                  "topic",
+                  "author",
+                  "created_at"
+                );
+              });
+            });
         });
       });
     });

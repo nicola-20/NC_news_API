@@ -6,6 +6,5 @@ topicsRouter
   .route("/")
   .get(getTopics)
   .all(methodNotAllowed);
-console.log(getTopics, "getTopics");
 
 module.exports = topicsRouter;
