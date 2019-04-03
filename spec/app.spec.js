@@ -26,9 +26,17 @@ describe("/", () => {
               });
             });
         });
+        it("GET STATUS 200 by sending back an array of 2 topics", () => {
+          return request
+            .get("/api/topics")
+            .expect(200)
+            .then(({ body }) => {
+              expect(body.topics).to.have.lengthOf(2);
+            });
+        });
       });
       describe("ERROR HANDLING FOR TOPICS", () => {
-        it("STATUS 505 for invalid method", () => {
+        it("STATUS 405 for invalid method for topics", () => {
           const invalidMethods = ["post", "patch", "delete", "put"];
           const methodPromises = invalidMethods.map(method =>
             request[method]("/api/topics").expect(405)
@@ -57,6 +65,15 @@ describe("/", () => {
                 );
               });
             });
+        });
+      });
+      describe("ERROR HANDLING FOR ARTICLES ", () => {
+        it('"STATUS 405 for invalid method for articles"', () => {
+          const invalidMethods = ["post", "patch", "delete", "put"];
+          const methodPromises = invalidMethods.map(method =>
+            request[method]("/api/topics").expect(405)
+          );
+          return Promise.all(methodPromises);
         });
       });
     });
