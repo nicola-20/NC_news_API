@@ -8,18 +8,24 @@ const connection = require("../db/connection");
 
 const request = supertest(app);
 
-xdescribe("/", () => {
-  // beforeEach(() => connection.seed.run());
+describe("/", () => {
+  beforeEach(() => connection.seed.run());
   after(() => connection.destroy());
 
   describe("/api", () => {
-    it("GET status:200", () => {
-      return request
-        .get("/api")
-        .expect(200)
-        .then(({ body }) => {
-          expect(body.ok).to.equal(true);
+    describe("/topics", () => {
+      describe("DEFAULT BEHEAVIOURS", () => {
+        it("GET status 200: responds with an array of topics objects", () => {
+          return request
+            .get("/api/topics")
+            .expect(200)
+            .then(({ body }) => {
+              body.topics.forEach(topic => {
+                expect(topic).to.contain.keys("slug", "description");
+              });
+            });
         });
+      });
     });
   });
 });
