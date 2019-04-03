@@ -26,6 +26,15 @@ describe("/", () => {
             });
         });
       });
+      describe("ERROR HANDLING FOR TOPICS", () => {
+        it("STATUS 505 for invalid method", () => {
+          const invalidMethods = ["post", "patch", "delete", "put"];
+          const methodPromises = invalidMethods.map(method =>
+            request[method]("/api/topics").expect(405)
+          );
+          return Promise.all(methodPromises);
+        });
+      });
     });
   });
 });
