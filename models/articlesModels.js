@@ -1,6 +1,6 @@
 const connection = require("../db/connection");
 
-exports.selectArticles = ({ author }) => {
+exports.selectArticles = ({ author, article_id }) => {
   return connection
     .select(
       "articles.article_id",
@@ -17,5 +17,9 @@ exports.selectArticles = ({ author }) => {
     .count({ comment_count: "comment_id" })
     .where(builder => {
       if (author !== undefined) builder.where({ "articles.author": author });
+      if (article_id !== undefined)
+        builder.where({
+          "articles.article_id": article_id
+        });
     });
 };
