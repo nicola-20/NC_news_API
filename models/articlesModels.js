@@ -12,7 +12,7 @@ exports.selectArticles = () => {
       "articles.votes"
     )
     .from("articles")
-    .leftJoin("comments", "articles.article_id", "=", "comments.article_id")
-    .count("articles.article_id as comment_count")
-    .groupBy("articles.article_id");
+    .leftJoin("comments", "comments.article_id", "articles.article_id")
+    .groupBy("articles.article_id")
+    .count({ comment_count: "comment_id" });
 };

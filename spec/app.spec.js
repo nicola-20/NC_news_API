@@ -67,7 +67,22 @@ describe("/", () => {
               });
             });
         });
+        it("GET status 200:responds with a comment count for an article_id", () => {
+          return request
+            .get("/api/articles")
+            .expect(200)
+            .then(({ body }) => {
+              expect(body.articles[8].comment_count).to.eql("2");
+            });
+        });
       });
+      //   describe('ARTICLE QUERIES', () => {
+      //     it('GET STATUS 200 for an author query', () => {
+      //       return request.get('/api/articles?author=')
+      //       .expect(200)
+      //       .then()
+      //     });
+      // });
       describe("ERROR HANDLING FOR ARTICLES ", () => {
         it('"STATUS 405 for invalid method for articles"', () => {
           const invalidMethods = ["post", "patch", "delete", "put"];

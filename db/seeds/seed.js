@@ -27,15 +27,19 @@ exports.seed = (knex, Promise) => {
     )
     .then(() => {
       const reformedDate = reformDate(articlesData);
-      knex("articles")
+      return knex("articles")
         .insert(reformedDate)
         .returning("*");
     })
-    .then(() => {
-      const commentOwner = articleOrigin(articlesData);
+    .then(articlesRows => {
+      const commentOwner = articleOrigin(articlesRows);
       const commentCreator = reformComment(commentsData, commentOwner);
-      knex("comments")
+      return knex("comments")
         .insert(commentCreator)
-        .returning("*");
+        .returning("*")
+        .then();
     });
+  // .then(commentRows => {
+  //   console.log(commentRows[0], "comments");
+  // });
 };
