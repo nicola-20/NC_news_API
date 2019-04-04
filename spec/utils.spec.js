@@ -5,7 +5,7 @@ const {
   reformComment
 } = require("../db/utils/assistanceFunctions");
 
-xdescribe("reformDate", () => {
+describe("reformDate", () => {
   it("can take an array of an object and return the date key reformed to YYYY-MM-DD", () => {
     const oldDate = [
       {

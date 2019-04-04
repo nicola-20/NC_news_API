@@ -1,6 +1,6 @@
 const connection = require("../db/connection");
 
-exports.selectArticles = () => {
+exports.selectArticles = ({ author }) => {
   return connection
     .select(
       "articles.article_id",
@@ -14,5 +14,8 @@ exports.selectArticles = () => {
     .from("articles")
     .leftJoin("comments", "comments.article_id", "articles.article_id")
     .groupBy("articles.article_id")
-    .count({ comment_count: "comment_id" });
+    .count({ comment_count: "comment_id" })
+    .where(builder => {
+      if (author !== undefined) builder.where({ "articles.author": author });
+    });
 };

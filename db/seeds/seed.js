@@ -36,10 +36,6 @@ exports.seed = (knex, Promise) => {
       const commentCreator = reformComment(commentsData, commentOwner);
       return knex("comments")
         .insert(commentCreator)
-        .returning("*")
-        .then();
+        .returning("*");
     });
-  // .then(commentRows => {
-  //   console.log(commentRows[0], "comments");
-  // });
 };

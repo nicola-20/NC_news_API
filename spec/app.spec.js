@@ -76,13 +76,18 @@ describe("/", () => {
             });
         });
       });
-      //   describe('ARTICLE QUERIES', () => {
-      //     it('GET STATUS 200 for an author query', () => {
-      //       return request.get('/api/articles?author=')
-      //       .expect(200)
-      //       .then()
-      //     });
-      // });
+      describe("ARTICLE QUERIES", () => {
+        it("GET STATUS 200 for an author query", () => {
+          return request
+            .get("/api/articles?author=butter_bridge")
+            .expect(200)
+            .then(({ body }) => {
+              console.log(body.articles, "author");
+              expect(body.articles.length).to.equal(3);
+            });
+        });
+      });
+      //REST QUERIES INGORED
       describe("ERROR HANDLING FOR ARTICLES ", () => {
         it('"STATUS 405 for invalid method for articles"', () => {
           const invalidMethods = ["post", "patch", "delete", "put"];
