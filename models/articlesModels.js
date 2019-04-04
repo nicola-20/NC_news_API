@@ -23,3 +23,10 @@ exports.selectArticles = ({ author, article_id }) => {
         });
     });
 };
+
+exports.updateArticles = ({ articles }, { inc_votes }) => {
+  return connection("articles")
+    .where("article_id", articles.article_id)
+    .increment("votes", inc_votes)
+    .returning("*");
+};

@@ -104,7 +104,6 @@ describe("/", () => {
           .get("/api/articles/1")
           .expect(200)
           .then(({ body: { articles } }) => {
-            console.log(articles, "id");
             expect(articles).to.eql([
               {
                 article_id: 1,
@@ -114,6 +113,26 @@ describe("/", () => {
                 body: "I find this existence challenging",
                 created_at: "2018-11-15T00:00:00.000Z",
                 votes: 100,
+                comment_count: "13"
+              }
+            ]);
+          });
+      });
+      //PATCH METHOD for /:ARTICLE_ID
+      it("PATCH status 200 returns incremented votes for that article", () => {
+        return request
+          .patch("/api/articles/1")
+          .send({ inc_votes: 1 })
+          .then(({ body: { articles } }) => {
+            expect(articles).to.eql([
+              {
+                article_id: 1,
+                title: "Living in the shadow of a great man",
+                topic: "mitch",
+                author: "butter_bridge",
+                body: "I find this existence challenging",
+                created_at: "2018-11-15T00:00:00.000Z",
+                votes: 101,
                 comment_count: "13"
               }
             ]);
