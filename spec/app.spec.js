@@ -138,6 +138,9 @@ describe("/", () => {
             ]);
           });
       });
+      //DELETE METHOD for /:ARTICLE_ID
+      it("DELETE status 204 returns no context", () =>
+        request.delete("/api/articles/1").expect(204));
     });
   });
 });

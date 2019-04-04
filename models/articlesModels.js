@@ -24,9 +24,16 @@ exports.selectArticles = ({ author, article_id }) => {
     });
 };
 
-exports.updateArticles = ({ articles }, { inc_votes }) => {
+exports.updateArticles = ({ articles, inc_votes }) => {
+  return connection("articles")
+    .where("articles.article_id", articles.article_id)
+    .increment("articles.votes", inc_votes)
+    .returning("*");
+};
+
+exports.removeArticles = ({ articles }) => {
   return connection("articles")
     .where("article_id", articles.article_id)
-    .increment("votes", inc_votes)
+    .del()
     .returning("*");
 };

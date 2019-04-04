@@ -2,7 +2,8 @@ const articlesRouter = require("express").Router();
 const {
   getArticles,
   getArticleById,
-  patchArticle
+  patchArticle,
+  deleteArticle
 } = require("../controllers/articlesController");
 const { methodNotAllowed } = require("../errors/index");
 
@@ -14,6 +15,7 @@ articlesRouter
 articlesRouter
   .route("/:article_id")
   .get(getArticleById)
-  .patch(patchArticle);
+  .patch(patchArticle)
+  .delete(deleteArticle);
 
 module.exports = articlesRouter;
