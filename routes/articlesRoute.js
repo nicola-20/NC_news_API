@@ -3,7 +3,8 @@ const {
   getArticles,
   getArticleById,
   patchArticle,
-  deleteArticle
+  deleteArticle,
+  getArticleComments
 } = require("../controllers/articlesController");
 const { methodNotAllowed } = require("../errors/index");
 
@@ -17,5 +18,7 @@ articlesRouter
   .get(getArticleById)
   .patch(patchArticle)
   .delete(deleteArticle);
+
+articlesRouter.route("/:article_id/comments").get(getArticleComments);
 
 module.exports = articlesRouter;

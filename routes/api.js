@@ -2,6 +2,7 @@ const apiRouter = require("express").Router();
 const { methodNotAllowed } = require("../errors");
 const topicsRouter = require("./topicsRoute");
 const articlesRouter = require("./articlesRoute");
+// const commentsRouter = require("./commentsRoute");
 
 apiRouter
   .route("/")

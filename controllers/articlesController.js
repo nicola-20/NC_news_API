@@ -1,7 +1,8 @@
 const {
   selectArticles,
   updateArticles,
-  removeArticles
+  removeArticles,
+  fetchArticleComments
 } = require("../models/articlesModels");
 
 exports.getArticles = (req, res, next) => {
@@ -25,5 +26,11 @@ exports.patchArticle = (req, res, next) => {
 exports.deleteArticle = (req, res, next) => {
   removeArticles(req.params).then(() => {
     res.status(204).json();
+  });
+};
+
+exports.getArticleComments = (req, res, next) => {
+  fetchArticleComments(req.params).then(articles => {
+    res.status(200).json({ articles });
   });
 };

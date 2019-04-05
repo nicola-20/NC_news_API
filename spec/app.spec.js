@@ -35,6 +35,7 @@ describe("/", () => {
             });
         });
       });
+      //ERROR HANDLING FOR TOPICS
       describe("ERROR HANDLING FOR TOPICS", () => {
         it("STATUS 405 for invalid method for topics", () => {
           const invalidMethods = ["post", "patch", "delete", "put"];
@@ -76,6 +77,7 @@ describe("/", () => {
             });
         });
       });
+      //ARTICLE QUERIES
       describe("ARTICLE QUERIES", () => {
         it("GET STATUS 200 for an author query", () => {
           return request
@@ -85,8 +87,14 @@ describe("/", () => {
               expect(body.articles.length).to.equal(3);
             });
         });
+        it("GET STATUS 200 for a topic query", () => {
+          return request
+            .get("/api/articles?topic=mitch")
+            .expect(200)
+            .then(({ body }) => expect(body.articles.length).to.equal(11));
+        });
       });
-      //REST QUERIES INGORED
+      //ARTICLES ERROR HANDLING
       describe("ERROR HANDLING FOR ARTICLES ", () => {
         it('"STATUS 405 for invalid method for articles"', () => {
           const invalidMethods = ["post", "patch", "delete", "put"];
